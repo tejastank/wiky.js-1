@@ -24,10 +24,23 @@ pre {
 }
 
 div.expander div.title {
-    border-bottom:1px dotted gray;
+    border-bottom:1px dotted #003366;
     display: inline-block;
     cursor:pointer;
+    color: #003366;
+    background-repeat:no-repeat;
+    background-position:left;
+    padding-left:12px;
 }
+
+div.expander.opened div.title {
+    background-image: url(data:image/gif;base64,R0lGODlhCwALAMQWALW1tXd3d3FxcWlpaYaGhpCQkOHh4fv7+5ubm9DQ0KKiovf397Ozs/Pz8+7u7ujo6MfHx2NjY+bm5m5ubmJiYmFhYf///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABYALAAAAAALAAsAAAUtoCWOZGmKTKVSaoWIi0DN7OCM0KoCJTFXgUPJEKlQEicFpXCyNCaSpuUhPYUAADs=);
+}
+
+div.expander.closed div.title {
+    background-image: url(data:image/gif;base64,R0lGODlhCwALAMQWALW1tXd3d3FxcWlpaZubm+jo6KKiouHh4YaGhtDQ0Pv7+7Ozs8fHx25ububm5u7u7vf39/Pz82NjY4+Pj2JiYmFhYf///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABYALAAAAAALAAsAAAUtoCWOpEg8JVkNgJJaVRwkaUXF1OSQVH9TjcLIZpMYIqob4lATMF6WBQRKFYUAADs=);
+}
+
 
 div.expander.closed div.content {
     display: none;
@@ -37,4 +50,17 @@ div.expander.opened div.content {
     display: block;
     border: 1px solid silver;
     padding: 5px;
+}
+
+div img {
+     border: 1px solid silver;
+     box-shadow: 4px 4px 10px silver;
+     display: inline-block;
+     left: 50%;
+}
+
+.evaluation-wiki-link {
+    border-bottom:1px dotted gray;
+    display: inline-block;
+    cursor: help;
 }

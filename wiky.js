@@ -58,21 +58,23 @@ var Wiky = {
        { rex:/\*\*([^*]+)\*\*/g, tmplt:"<strong>$1</strong>" },  // .. strong ..
        { rex:/__([^_]+)__/g, tmplt:"<em>$1</em>" },
        { rex:/\^\^([^^]+)\^\^/g, tmplt:"<sup>$1</sup>" },
+       { rex:/-----------+/g, tmplt:"<hr/>" },
        { rex:/~~([^~]+)~~/g, tmplt:"<sub>$1</sub>" },
        { rex:/--(.+?)--/g, tmplt:"<del>$1</del>" },
        { rex:/\?\?([^ \t\f\v\xB6]+)\((.+)\)\?\?/g, tmplt:"<abbr title=\"$2\">$1</abbr>" },  // .. abbreviation ..
        { rex:/\[(?:\{([^}]*)\})?[Ii]ma?ge?\:([^ ,\]]*)(?:[, ]([^\]]*))?\]/g, tmplt:function($0,$1,$2,$3){return Wiky.store("<img"+Wiky.style($1)+" src=\""+$2+"\" alt=\""+($3?$3:$2)+"\" title=\""+($3?$3:$2)+"\"/>");} },  // wikimedia image style ..
        //{ rex:/\[([^ ,]+)[, ]([^\]]*)\]/g, tmplt:function($0,$1,$2){return Wiky.store("<a href=\""+$1+"\">"+$2+"</a>");}},  // wiki block style uri's ..
-       { rex:/file:(\S+?\.(?:jpe?g|gif|png))/g, tmplt: "<img src=\"$1\"/>"},
+       { rex:/file:(\S+?\.(?:jpe?g|gif|png))/g, tmplt: "<div><img src=\"$1\"/></div>"},
        { rex:/file:(\S+)/g, tmplt: "<a href=\"$1\">$1</a>"},
        //{ rex:/(((http(s?))\:\/\/)?[A-Za-z0-9\._\/~\-:]+\.(?:png|jpg|jpeg|gif|bmp))/g, tmplt:function($0,$1,$2){return Wiky.store("<img src=\""+$1+"\" alt=\""+$1+"\"/>");} },  // simple images ..
        //{ rex:/((mailto\:|javascript\:|(news|file|(ht|f)tp(s?))\:\/\/)[A-Za-z0-9\.:_\/~%\-+&#?!=()@\x80-\xB5\xB7\xFF]+)/g, tmplt:"<a href=\"$1\">$1</a>" },  // simple uri's ..
        { rex:/\(\(([a-zA-Z0-9_\/-]+) (.+?)\)\)/g, tmplt: "<a href=\"/$1\">$2</a>" },  // wacko links with desc
        { rex:/\(\(([a-zA-Z0-9_\/-]+)\)\)/g, tmplt: "<a href=\"/$1\">$1</a>" },  // wacko links without desc
-       { rex:/\(\((http:\/\/wiki.evaluation.yandex-team.ru\S+)\s+?(\S+)\)\)/g, tmplt: "<a title='$1' class='evaluation-wiki-link'>$2</a>"},      // remove wiki-evaluation links
+       { rex:/\(\((http:\/\/wiki.evaluation.yandex-team.ru\S+)\s+?([^\)]+)\)\)/g, tmplt: "<a class='evaluation-wiki-link'>$2</a>"},      // remove wiki-evaluation links
        { rex: /\(\((\S+) (.+)\)\)/g, tmplt: "<a href=\"$1\">$2</a>"},
        { rex: /(?:&lt;|<){([^\xB6]+)/g, tmplt: "<div class='expander closed'><div class='title'>$1</div><div class='content'>"},
-       { rex: /}(?:&gt;|>)/g, tmplt: "</div></div>"}
+       { rex: /}(?:&gt;|>)/g, tmplt: "</div></div>"},
+       { rex: /(http[^\s\xB6]+)/g, tmplt: "<a href='http://h.yandex.net/?$1'>$1</a>"}
      ],
      escapes: [
        { rex:/\\([|*_~\^])/g, tmplt:function($0,$1){return Wiky.store($1);} },
