@@ -59,15 +59,12 @@ var Wiky = {
        { rex:/__([^_]+)__/g, tmplt:"<em>$1</em>" },
        { rex:/\^\^([^^]+)\^\^/g, tmplt:"<sup>$1</sup>" },
        { rex:/~~([^~]+)~~/g, tmplt:"<sub>$1</sub>" },
-       { rex:/--(.+?)--/g, tmplt:"<del>$1</del>" },
+       { rex:/\(--(.+?)--\)/g, tmplt:"<del>$1</del>" },
        { rex:/\?\?([^ \t\f\v\xB6]+)\((.+)\)\?\?/g, tmplt:"<abbr title=\"$2\">$1</abbr>" },  // .. abbreviation ..
        { rex:/\[(?:\{([^}]*)\})?[Ii]ma?ge?\:([^ ,\]]*)(?:[, ]([^\]]*))?\]/g, tmplt:function($0,$1,$2,$3){return Wiky.store("<img"+Wiky.style($1)+" src=\""+$2+"\" alt=\""+($3?$3:$2)+"\" title=\""+($3?$3:$2)+"\"/>");} },  // wikimedia image style ..
        { rex:/\[([^ ,]+)[, ]([^\]]*)\]/g, tmplt:function($0,$1,$2){return Wiky.store("<a href=\""+$1+"\">"+$2+"</a>");}},  // wiki block style uri's ..
        { rex:/(((http(s?))\:\/\/)?[A-Za-z0-9\._\/~\-:]+\.(?:png|jpg|jpeg|gif|bmp))/g, tmplt:function($0,$1,$2){return Wiky.store("<img src=\""+$1+"\" alt=\""+$1+"\"/>");} },  // simple images .. 
-       { rex:/((mailto\:|javascript\:|(news|file|(ht|f)tp(s?))\:\/\/)[A-Za-z0-9\.:_\/~%\-+&#?!=()@\x80-\xB5\xB7\xFF]+)/g, tmplt:"<a href=\"$1\">$1</a>" },  // simple uri's ..
-       { rex:/\(\(([a-zA-Z0-9_\/-]+) (.+?)\)\)/g, tmplt: "<a href=\"$1.html\">$2</a>" },  // wacko links with desc
-       { rex:/\(\(([a-zA-Z0-9_\/-]+)\)\)/g, tmplt: "<a href=\"$1.html\">$1</a>" }  // wacko links without desc
-
+       { rex:/((mailto\:|javascript\:|(news|file|(ht|f)tp(s?))\:\/\/)[A-Za-z0-9\.:_\/~%\-+&#?!=()@\x80-\xB5\xB7\xFF]+)/g, tmplt:"<a href=\"$1\">$1</a>" }  // simple uri's .. 
      ],
      escapes: [
        { rex:/\\([|*_~\^])/g, tmplt:function($0,$1){return Wiky.store($1);} },
@@ -142,7 +139,7 @@ var Wiky = {
        { rex:/<code>(.*?)<\/code>/g, tmplt:function($0,$1){return Wiky.store("%"+Wiky.apply($1, Wiky.inverse["code"])+"%");} }
      ],
      wikiinlines: [
-       { rex:/<strong[^>]*?>(.*?)<\/strong>/mgi, tmplt:"**$1**" },
+       { rex:/<strong[^>]*?>(.*?)<\/strong>/mgi, tmplt:"*$1*" },
        { rex:/<b[^>]*?>(.*?)<\/b>/mgi, tmplt:"*$1*" },
        { rex:/<em[^>]*?>(.*?)<\/em>/mgi, tmplt:"_$1_" },
        { rex:/<i[^>]*?>(.*?)<\/i>/mgi, tmplt:"_$1_" },
