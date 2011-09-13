@@ -59,7 +59,7 @@ var Wiky = {
        { rex:/__([^_]+)__/g, tmplt:"<em>$1</em>" },
        { rex:/\^\^([^^]+)\^\^/g, tmplt:"<sup>$1</sup>" },
        { rex:/~~([^~]+)~~/g, tmplt:"<sub>$1</sub>" },
-       { rex:/\(--(.+?)--\)/g, tmplt:"<del>$1</del>" },
+       { rex:/--(.+?)--/g, tmplt:"<del>$1</del>" },
        { rex:/\?\?([^ \t\f\v\xB6]+)\((.+)\)\?\?/g, tmplt:"<abbr title=\"$2\">$1</abbr>" },  // .. abbreviation ..
        { rex:/\[(?:\{([^}]*)\})?[Ii]ma?ge?\:([^ ,\]]*)(?:[, ]([^\]]*))?\]/g, tmplt:function($0,$1,$2,$3){return Wiky.store("<img"+Wiky.style($1)+" src=\""+$2+"\" alt=\""+($3?$3:$2)+"\" title=\""+($3?$3:$2)+"\"/>");} },  // wikimedia image style ..
        { rex:/\[([^ ,]+)[, ]([^\]]*)\]/g, tmplt:function($0,$1,$2){return Wiky.store("<a href=\""+$1+"\">"+$2+"</a>");}},  // wiki block style uri's ..
@@ -139,7 +139,7 @@ var Wiky = {
        { rex:/<code>(.*?)<\/code>/g, tmplt:function($0,$1){return Wiky.store("%"+Wiky.apply($1, Wiky.inverse["code"])+"%");} }
      ],
      wikiinlines: [
-       { rex:/<strong[^>]*?>(.*?)<\/strong>/mgi, tmplt:"*$1*" },
+       { rex:/<strong[^>]*?>(.*?)<\/strong>/mgi, tmplt:"**$1**" },
        { rex:/<b[^>]*?>(.*?)<\/b>/mgi, tmplt:"*$1*" },
        { rex:/<em[^>]*?>(.*?)<\/em>/mgi, tmplt:"_$1_" },
        { rex:/<i[^>]*?>(.*?)<\/i>/mgi, tmplt:"_$1_" },
