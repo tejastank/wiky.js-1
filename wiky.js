@@ -70,7 +70,9 @@ var Wiky = {
        { rex:/\(\(([a-zA-Z0-9_\/-]+) (.+?)\)\)/g, tmplt: "<a href=\"$1.html\">$2</a>" },  // wacko links with desc
        { rex:/\(\(([a-zA-Z0-9_\/-]+)\)\)/g, tmplt: "<a href=\"$1.html\">$1</a>" },  // wacko links without desc
        { rex:/\(\((http:\/\/wiki.evaluation.yandex-team.ru\S+)\s+?(\S+)\)\)/g, tmplt: "<a title='$1' class='evaluation-wiki-link'>$2</a>"},      // remove wiki-evaluation links
-       { rex: /\(\((\S+) (.+)\)\)/g, tmplt: "<a href=\"$1\">$2</a>"}
+       { rex: /\(\((\S+) (.+)\)\)/g, tmplt: "<a href=\"$1\">$2</a>"},
+       { rex: /(?:&lt;|<){([^\xB6]+)/g, tmplt: "<div class='expander closed'><div class='title'>$1</div><div class='content'>"},
+       { rex: /}(?:&gt;|>)/g, tmplt: "</div></div>"}
      ],
      escapes: [
        { rex:/\\([|*_~\^])/g, tmplt:function($0,$1){return Wiky.store($1);} },
@@ -377,4 +379,4 @@ var Wiky = {
                                                .replace(/\$1/, content)
                                                .replace(/<p><\/p>/, "");
    }
-}
+};
