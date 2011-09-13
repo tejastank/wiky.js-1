@@ -69,7 +69,7 @@ var Wiky = {
        //{ rex:/((mailto\:|javascript\:|(news|file|(ht|f)tp(s?))\:\/\/)[A-Za-z0-9\.:_\/~%\-+&#?!=()@\x80-\xB5\xB7\xFF]+)/g, tmplt:"<a href=\"$1\">$1</a>" },  // simple uri's ..
        { rex:/\(\(([a-zA-Z0-9_\/-]+) (.+?)\)\)/g, tmplt: "<a href=\"$1.html\">$2</a>" },  // wacko links with desc
        { rex:/\(\(([a-zA-Z0-9_\/-]+)\)\)/g, tmplt: "<a href=\"$1.html\">$1</a>" },  // wacko links without desc
-       { rex:/\(\(http:\/\/wiki.evaluation.yandex-team.ru\S+(.+)\)\)/g, tmplt: "<span class=\"evaluation-link\">$1</span>"},      // remove wiki-evaluation links
+       { rex:/\(\((http:\/\/wiki.evaluation.yandex-team.ru\S+)\s+?(\S+)\)\)/g, tmplt: "<a title='$1' class='evaluation-wiki-link'>$2</a>"},      // remove wiki-evaluation links
        { rex: /\(\((\S+) (.+)\)\)/g, tmplt: "<a href=\"$1\">$2</a>"}
      ],
      escapes: [
