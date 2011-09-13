@@ -16,12 +16,12 @@ var Wiky = {
        "Wiky.rules.post",
      ],
      pre: [
-       { rex:/(\r?\n)/g, tmplt:"\xB6" },  // replace line breaks with '¶' ..
+       { rex:/(\r?\n)/g, tmplt:"\xB6" },  // replace line breaks with 'ï¿½' ..
      ],
      post: [
        { rex:/(^\xB6)|(\xB6$)/g, tmplt:"" },  // .. remove linebreaks at BOS and EOS ..
        { rex:/@([0-9]+)@/g, tmplt:function($0,$1){return Wiky.restore($1);} }, // resolve blocks ..
-       { rex:/\xB6/g, tmplt:"\n" } // replace '¶' with line breaks ..
+       { rex:/\xB6/g, tmplt:"\n" } // replace 'ï¿½' with line breaks ..
      ],
      nonwikiblocks: [
        { rex:/\\([%])/g, tmplt:function($0,$1){return Wiky.store($1);} },
@@ -30,7 +30,7 @@ var Wiky = {
      wikiblocks: [
        "Wiky.rules.nonwikiinlines",
        "Wiky.rules.escapes",
-       { rex:/(?:^|\xB6)(={1,6})(.*?)[=]*(?=\xB6|$)/g, tmplt:function($0,$1,$2){ var h=$1.length; return ":p]\xB6<h"+h+">"+$2+"</h"+h+">\xB6[p:";} }, // <h1> .. <h6>
+       { rex:/(?:^|\xB6)(={2,7})(.*?)[=]*(?=\xB6|$)/g, tmplt:function($0,$1,$2){ var h=$1.length; return ":p]\xB6<h"+h+">"+$2+"</h"+h+">\xB6[p:";} }, // <h1> .. <h6>
        { rex:/(?:^|\xB6)[-]{4}(?:\xB6|$)/g, tmplt:"\xB6<hr/>\xB6" },  // horizontal ruler ..
        { rex:/\\\\([ \xB6])/g, tmplt:"<br/>$1" },  // forced line break ..
        { rex:/(^|\xB6)([*01aAiIg]*[\.*])[ ]/g, tmplt:function($0,$1,$2){var state=$2.replace(/([*])/g,"u").replace(/([\.])/,"");return ":"+state+"]"+$1+"["+state+":";}},
@@ -96,11 +96,11 @@ var Wiky = {
        "Wiky.inverse.post"
      ],
      pre: [
-       { rex:/(\r?\n)/g, tmplt:"\xB6" }  // replace line breaks with '¶' ..
+       { rex:/(\r?\n)/g, tmplt:"\xB6" }  // replace line breaks with 'ï¿½' ..
      ],
      post: [
        { rex:/@([0-9]+)@/g, tmplt:function($0,$1){return Wiky.restore($1);} },  // resolve blocks ..
-       { rex:/\xB6/g, tmplt:"\n" }  // replace '¶' with line breaks ..
+       { rex:/\xB6/g, tmplt:"\n" }  // replace 'ï¿½' with line breaks ..
      ],
      nonwikiblocks: [
        { rex:/<pre([^>]*)>(.*?)<\/pre>/mgi, tmplt:function($0,$1,$2){return Wiky.store("["+Wiky.invStyle($1)+Wiky.invAttr($1,["lang"]).replace(/x\-/,"")+"%"+Wiky.apply($2, Wiky.hasAttr($1,"lang")?Wiky.inverse.lang[Wiky.attrVal($1,"lang").substr(2)]:Wiky.inverse.code)+"%]");} } //code block
@@ -109,12 +109,12 @@ var Wiky = {
        "Wiky.inverse.nonwikiinlines",
        "Wiky.inverse.escapes",
        "Wiky.inverse.wikiinlines",
-       { rex:/<h1>(.*?)<\/h1>/mgi, tmplt:"=$1=" },
-       { rex:/<h2>(.*?)<\/h2>/mgi, tmplt:"==$1==" },
-       { rex:/<h3>(.*?)<\/h3>/mgi, tmplt:"===$1===" },
-       { rex:/<h4>(.*?)<\/h4>/mgi, tmplt:"====$1====" },
-       { rex:/<h5>(.*?)<\/h5>/mgi, tmplt:"=====$1=====" },
-       { rex:/<h6>(.*?)<\/h6>/mgi, tmplt:"======$1======" },
+       { rex:/<h1>(.*?)<\/h1>/mgi, tmplt:"==$1==" },
+       { rex:/<h2>(.*?)<\/h2>/mgi, tmplt:"===$1===" },
+       { rex:/<h3>(.*?)<\/h3>/mgi, tmplt:"====$1====" },
+       { rex:/<h4>(.*?)<\/h4>/mgi, tmplt:"=====$1=====" },
+       { rex:/<h5>(.*?)<\/h5>/mgi, tmplt:"======$1======" },
+       { rex:/<h6>(.*?)<\/h6>/mgi, tmplt:"=======$1=======" },
        { rex:/<(p|table)[^>]+(style=\"[^\"]*\")[^>]*>/mgi, tmplt:function($0,$1,$2){return "<"+$1+">"+Wiky.invStyle($2);} },
        { rex:/\xB6{2}<li/mgi, tmplt:"\xB6<li" },  // ie6 only ..
        { rex:/<li class=\"?([^ >\"]*)\"?[^>]*?>([^<]*)/mgi, tmplt:function($0,$1,$2){return $1.replace(/u/g,"*").replace(/([01aAiIg])$/,"$1.")+" "+$2;}},  // list items ..
