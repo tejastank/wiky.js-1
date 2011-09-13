@@ -13,10 +13,10 @@ var Wiky = {
        "Wiky.rules.pre",
        "Wiky.rules.nonwikiblocks",
        "Wiky.rules.wikiblocks",
-       "Wiky.rules.post",
+       "Wiky.rules.post"
      ],
      pre: [
-       { rex:/(\r?\n)/g, tmplt:"\xB6" },  // replace line breaks with '�' ..
+       { rex:/(\r?\n)/g, tmplt:"\xB6" }  // replace line breaks with '�' ..
      ],
      post: [
        { rex:/(^\xB6)|(\xB6$)/g, tmplt:"" },  // .. remove linebreaks at BOS and EOS ..
@@ -63,10 +63,12 @@ var Wiky = {
        { rex:/\?\?([^ \t\f\v\xB6]+)\((.+)\)\?\?/g, tmplt:"<abbr title=\"$2\">$1</abbr>" },  // .. abbreviation ..
        { rex:/\[(?:\{([^}]*)\})?[Ii]ma?ge?\:([^ ,\]]*)(?:[, ]([^\]]*))?\]/g, tmplt:function($0,$1,$2,$3){return Wiky.store("<img"+Wiky.style($1)+" src=\""+$2+"\" alt=\""+($3?$3:$2)+"\" title=\""+($3?$3:$2)+"\"/>");} },  // wikimedia image style ..
        { rex:/\[([^ ,]+)[, ]([^\]]*)\]/g, tmplt:function($0,$1,$2){return Wiky.store("<a href=\""+$1+"\">"+$2+"</a>");}},  // wiki block style uri's ..
-       { rex:/(((http(s?))\:\/\/)?[A-Za-z0-9\._\/~\-:]+\.(?:png|jpg|jpeg|gif|bmp))/g, tmplt:function($0,$1,$2){return Wiky.store("<img src=\""+$1+"\" alt=\""+$1+"\"/>");} },  // simple images ..
+       { rex:/file:(\S+?\.(?:jpe?g|gif|png))/g, tmplt: "<img src=\"$1\"/>"},
+       { rex:/file:(\S+)/g, tmplt: "<a href=\"$1\">$1</a>"},
+       //{ rex:/(((http(s?))\:\/\/)?[A-Za-z0-9\._\/~\-:]+\.(?:png|jpg|jpeg|gif|bmp))/g, tmplt:function($0,$1,$2){return Wiky.store("<img src=\""+$1+"\" alt=\""+$1+"\"/>");} },  // simple images ..
        { rex:/((mailto\:|javascript\:|(news|file|(ht|f)tp(s?))\:\/\/)[A-Za-z0-9\.:_\/~%\-+&#?!=()@\x80-\xB5\xB7\xFF]+)/g, tmplt:"<a href=\"$1\">$1</a>" },  // simple uri's ..
        { rex:/\(\(([a-zA-Z0-9_\/-]+) (.+?)\)\)/g, tmplt: "<a href=\"$1.html\">$2</a>" },  // wacko links with desc
-       { rex:/\(\(([a-zA-Z0-9_\/-]+)\)\)/g, tmplt: "<a href=\"$1.html\">$1</a>" }  // wacko links withoutя desc
+       { rex:/\(\(([a-zA-Z0-9_\/-]+)\)\)/g, tmplt: "<a href=\"$1.html\">$1</a>" },  // wacko links withoutя desc
 
      ],
      escapes: [
@@ -81,7 +83,7 @@ var Wiky = {
        { rex:/[\.]{3}/g, tmplt:"&#8230;"}, // &hellip;
        { rex:/<->/g, tmplt:"&#8596;"}, // $harr;
        { rex:/<-/g, tmplt:"&#8592;"}, // &larr;
-       { rex:/->/g, tmplt:"&#8594;"}, //&rarr;
+       { rex:/->/g, tmplt:"&#8594;"} //&rarr;
      ],
      code: [
        { rex:/&/g, tmplt:"&amp;"},
@@ -151,7 +153,7 @@ var Wiky = {
        { rex:/<del[^>]*?>(.*?)<\/del>/mgi, tmplt:"(-$1-)" },
        { rex:/<abbr title=\"([^\"]*)\">(.*?)<\/abbr>/mgi, tmplt:"?$2($1)?" },
        { rex:/<a href=\"([^\"]*)\"[^>]*?>(.*?)<\/a>/mgi, tmplt:function($0,$1,$2){return $1==$2?$1:"["+$1+","+$2+"]";}},
-       { rex:/<img([^>]*)\/>/mgi, tmplt:function($0,$1){var a=Wiky.attrVal($1,"alt"),h=Wiky.attrVal($1,"src"),t=Wiky.attrVal($1,"title"),s=Wiky.attrVal($1,"style");return s||(t&&h!=t)?("["+Wiky.invStyle($1)+"img:"+h+(t&&(","+t))+"]"):h;}},
+       { rex:/<img([^>]*)\/>/mgi, tmplt:function($0,$1){var a=Wiky.attrVal($1,"alt"),h=Wiky.attrVal($1,"src"),t=Wiky.attrVal($1,"title"),s=Wiky.attrVal($1,"style");return s||(t&&h!=t)?("["+Wiky.invStyle($1)+"img:"+h+(t&&(","+t))+"]"):h;}}
      ],
      escapes: [
        { rex:/([|*_~%\^])/g, tmplt:"\\$1" },
@@ -177,6 +179,7 @@ var Wiky = {
 
    toHtml: function(str) {
       Wiky.blocks = [];
+       console.warn(str);
       return Wiky.apply(str, Wiky.rules.all);
    },
 
