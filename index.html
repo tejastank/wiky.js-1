@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<link href="wiky.css" rel="stylesheet"/>
+		<link href="wiky.lang.css" rel="stylesheet"/>
+		<link href="wiky.math.css" rel="stylesheet"/>
+		<script src="wiky.js"></script>
+		<script src="wiky.lang.js"></script>
+		<script src="wiky.math.js"></script>
+		<!--<script src="http://yandex.st/jquery/1.6.2/jquery.min.js"></script>-->
+		<script src="jquery.min.js"></script>
+
+	</head>
+	<body>
+		<script>
+			$(document).ready(function() {
+				$('div.wikiToHtml').each(function() {
+					$(this).html( Wiky.toHtml($(this).html()) );
+				});
+			});
+		</script>
+
+		<div class="wikiToHtml">
+===Интерфейс оценки===
+Кликнув по запросу, мы попадаем в интерфейс оценки. Под Яндекс.Баром (у вас ведь стоит ((http://bar.yandex.ru/firefox/ Яндекс.Бар))? ;-) Он полезен при работе, да и вообще), итак, под Яндекс.Баром появляется красивая оранжево-бело-зелёная панель.
+Слева направо мы видим: запрос, регион, текущий урл, ссылки на копии в Яндексе и Гугле, крестик для закрытия задания.
+Строкой ниже: блок предварительной оценки, кнопки "оценить заново", "добавить урл" и счётчик времени.
+Если кликнуть по запросу, то развернётся окошко, где вы увидите: тип задания, аннотацию к запросу, ((https://wiki.evaluation.yandex-team.ru/HomePage#h1-4 переформулировки)) и ((https://wiki.evaluation.yandex-team.ru/Gloss2#h15-31 кликабельность)) (количество ((https://wiki.evaluation.yandex-team.ru/Gloss2#h15-30 кликов)), которые заслужили от пользователей те или иные выданные по запросу ((https://wiki.evaluation.yandex-team.ru/Gloss2#h15-78 урлы))). Аннотацию к запросу пишет администратор. Если она кажется вам недостаточной или неправильной, нужно обратиться за разъяснением (лучше всего - с помощью кнопки "?" на главной странице). Помните, что аннотация ни в коем случае не подменяет собой запрос, она может только пояснять его. Вы оцениваете релевантность выдачи запросу, а не аннотации. Поэтому сомневаться в аннотации и уточнять её у разметчика - нормально.
+Кликните ещё раз - окошко свернётся.
+Теперь вы должны поставить оценку по основной шкале ("404", "вирус", (((http://wiki.evaluation.yandex-team.ru/Newrel#polozhitelnyeocenki.vitalnyjj Витальный)), ((http://wiki.evaluation.yandex-team.ru/Newrel#polozhitelnyeocenki.poleznyjj Полезный)), ((http://wiki.evaluation.yandex-team.ru/Newrel#polozhitelnyeocenki.relevantnyjj Релевантный+)), ((http://wiki.evaluation.yandex-team.ru/Newrel#otricatelnyeocenki.relevantnyjj- Релевантный-)), ((http://wiki.evaluation.yandex-team.ru/Newrel#otricatelnyeocenki.nerelevantnyjj Нерелевантный)), ((http://wiki.evaluation.yandex-team.ru/Newrel#otricatelnyeocenki.neprotoglupyjj Не про то))).
+Далее последуют дополнительные  шкалы: шкала спама и шкала актуальности.
+Если вы хотите изменить поставленную оценку (вне зависимости от того, в каком блоке она была поставлена), нужно нажать кнопку "оценить заново". Оценки сбросятся.
+Естественно, что в задание редко помещаются все хорошие ответы, которые можно найти в сети. Мы поможем поиску, воспользовавшись кнопкой "Добавить урл". Добавить можно только тот урл, которого нет в задании. Добавлять нужно только хорошие документы - Релевантные+, Полезные и Витальные. В заданиях с локализацией в маленьких регионах  можно также добавлять документы, оцениваемые как рел- . Добавление урлов поощряется, вы увидите добавленный урл на вкладке "Зарплата" :)
+!!Внимание! в типах заданий ((http://wiki.evaluation.yandex-team.ru/Glossarijj#doocenka "дооценка")) и ((http://wiki.evaluation.yandex-team.ru/Glossarijj#pereocenka "переоценка")) добавлять урлы не нужно!!!
+((http://wiki.evaluation.yandex-team.ru/podrobnee#h48-1 Как добавить урл в список оценки ))
+
+		</div>
+	</body>
+</html>
