@@ -380,3 +380,12 @@ var Wiky = {
                                                .replace(/<p><\/p>/, "");
    }
 };
+
+window.onload = function() {
+    if (!$) {
+        return;
+    }
+    $('div.expander div.title').click(function() {
+        $(this).parent().toggleClass('closed').toggleClass('opened');
+    })
+};

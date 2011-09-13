@@ -1,15 +1,40 @@
 /* == wiky == */
-*.wiki blockquote { background:#ddd; border:solid 1px #999; margin-left:1em; padding:0.5em;}
+*.wiki blockquote {
+    background: #ddd;
+    border: solid 1px #999;
+    margin-left: 1em;
+    padding: 0.5em;
+}
+
 *.wiki table {
-  border-collapse: collapse;
-  empty-cells: show;
+    border-collapse: collapse;
+    empty-cells: show;
 }
 
 *.wiki table td {
-  border: solid 1px black;
-  padding: 0.25em 0.5em 0.25em 0.5em;
-  text-align: center;
+    border: solid 1px black;
+    padding: 0.25em 0.5em 0.25em 0.5em;
+    text-align: center;
 }
 
 /*pre { font-size:100%; background: #eed; border:1px dotted #999; padding:0 0.5em; overflow:auto; }*/
-pre { font-family:courier new, monospace; overflow:auto; }
+pre {
+    font-family: courier new, monospace;
+    overflow: auto;
+}
+
+div.expander div.title {
+    border-bottom:1px dotted gray;
+    display: inline-block;
+    cursor:pointer;
+}
+
+div.expander.closed div.content {
+    display: none;
+}
+
+div.expander.opened div.content {
+    display: block;
+    border: 1px solid silver;
+    padding: 5px;
+}
